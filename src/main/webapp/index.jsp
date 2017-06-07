@@ -11,5 +11,6 @@
 			value="bilalchami" /> <br /> <br /> <input type="submit"
 			value="Submit">
 	</form>
+	<a href="./Login">asd</a>
 </body>
 </html>

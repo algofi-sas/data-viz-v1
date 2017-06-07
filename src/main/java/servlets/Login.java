@@ -1,19 +1,13 @@
 package servlets;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonObject;
+import org.json.JSONObject;
 
 import utils.HttpRequest;
 
@@ -50,10 +44,10 @@ public class Login extends HttpServlet {
 			if (username.equals("bilalchami") && password.equals("bilalchami")) {
 				System.out.println("Before Redirect");
 				
-				JsonObject loginUser = new JsonObject();
+				JSONObject loginUser = new JSONObject();
 
-				loginUser.addProperty("username", "bilalchami");
-				loginUser.addProperty("password", "bilalchami");
+				loginUser.put("username", "bilalchami");
+				loginUser.put("password", "bilalchami");
 				
 				HttpRequest httpRequest = new HttpRequest("https://api.scriptrapps.io/login?auth_token=TjQ0REMzQTkyMQ==", "POST", loginUser.toString(), HttpRequest.JSON_FORMAT + "charset=UTF-8");
 				
