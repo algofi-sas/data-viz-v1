@@ -34,9 +34,9 @@
 					<div style="position: absolute; top: 48%; left: 48%; font-size: xx-large;">Loading...</div>
 				</div>
 				<div class="w3-col">
+					<h1 class="w3-center">Quandl Time Series API</h1>
+					<hr />
 					<form class="w3-container">
-						<h1 class="w3-center">Quandl Time Series API</h1>
-						<hr />
 						<div class="w3-col m1 l1">&nbsp;</div>
 						<div class="w3-col m2 l2">
 							<label class="block-label">
@@ -86,10 +86,11 @@
 							<label class="block-label">
 							&nbsp;
 							</label>
-							<button ng-click="search()">Search</button>
-							<button ng-click="clear()">Clear</button>
+							<button ng-click="search()" class="w3-button w3-green w3-hover-green w3-round">Search</button>
+							<button ng-click="clear()" class="w3-button w3-red w3-hover-red w3-round">Clear</button>
 						</div>
 					</form>
+				<hr />
 				</div>
 				<table ng-show="succeded" id="myTable" class="w3-table-all w3-centered w3-striped w3-hoverable">
 					<thead>
