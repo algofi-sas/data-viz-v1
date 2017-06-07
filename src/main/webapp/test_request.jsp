@@ -20,7 +20,8 @@ table, tr, td, th {
 
 .block-label {
 	display: block;
-	padding: 0px 0px 5px 0px;
+	padding: 5px 0px 5px 0px;
+	font-weight: bold;
 }
 
 input, textarea, select {
