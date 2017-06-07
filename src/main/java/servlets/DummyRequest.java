@@ -24,12 +24,10 @@ public class DummyRequest extends HttpServlet {
      */
     public DummyRequest() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
-		System.out.println("TEST");
 		String apiKey = "DKczFdjuL_16KZVxeZKk";
 		
 		String databaseCode = request.getParameter("database_code");
@@ -56,7 +54,18 @@ public class DummyRequest extends HttpServlet {
 		params.put("order", order);
 		params.put("end_date", endDate);
 		params.put("start_date", startDate);
-		params.put("limit", limit);
+		
+		
+		if(limit!=null){
+			if(Integer.valueOf(limit)>0){
+				params.put("limit", limit);
+			}
+		}
+		if(columnIndex!=null){
+			if(Integer.valueOf(columnIndex)>-1){
+				params.put("column_index", columnIndex);
+			}
+		}
 		
 		
 		HttpRequest httpRequest = new HttpRequest(
