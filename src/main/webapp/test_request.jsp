@@ -33,6 +33,19 @@ select {
 	height: 39px;
 	min-width: 225px;
 }
+
+.spin-rotation{
+	animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
 </style>
 </head>
 <body>
@@ -43,7 +56,9 @@ select {
 				style="background-color: rgba(128, 128, 128, 0.5); width: 100%; height: 100%; margin: 0; top: 0; left: 0; position: absolute; z-index: 1;"
 				ng-show="loading">
 				<div
-					style="position: absolute; top: 48%; left: 48%; font-size: xx-large;">Loading...</div>
+					style="position: absolute; top: 45%; left: 45%; font-size: xx-large;">
+					<img src="images/spinner.png" alt="spinner" class="spin-rotation" width="5%">
+					Loading...</div>
 			</div>
 			<div class="w3-col">
 				<h1 class="w3-center">Quandl Time Series API</h1>

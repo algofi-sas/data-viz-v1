@@ -49,6 +49,7 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 		$scope.succeded = false;
 		var chartContainer = document.getElementById("chartContainer");
 		chartContainer.innerHTML = "";
+		$scope.requestResponse = {};
 	}
 
 	$scope.search = function (){
