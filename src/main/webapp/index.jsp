@@ -11,6 +11,6 @@
 			value="bilalchami" /> <br /> <br /> <input type="submit"
 			value="Submit">
 	</form>
-	<a href="./Login">Bilal</a>
+	<a href="./Login">mouloud</a>
 </body>
 </html>
