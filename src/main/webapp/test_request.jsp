@@ -35,18 +35,33 @@ select {
 	min-width: 225px;
 }
 
-.spin-rotation{
+.spin-rotation {
 	animation-name: spin;
-    animation-duration: 4000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+	animation-duration: 4000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.loader {
+	border: 6px solid #f3f3f3;
+	-webkit-animation: spin 1s linear infinite;
+	animation: spin 1s linear infinite;
+	border-top: 6px solid #555;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	margin-left: 20%;
+	display: inline-block;
 }
 
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
-
 </style>
 </head>
 <body>
@@ -58,8 +73,8 @@ select {
 				ng-show="loading">
 				<div
 					style="position: absolute; top: 45%; left: 45%; font-size: xx-large;">
-					<img src="images/spinner.png" alt="spinner" class="spin-rotation" width="5%">
-					Loading...</div>
+					<div class="loader"></div><span>Loading...</span>
+				</div>
 			</div>
 			<div class="w3-col">
 				<h1 class="w3-center">Quandl Time Series API</h1>
