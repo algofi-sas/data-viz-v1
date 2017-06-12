@@ -7,6 +7,6 @@ import org.junit.Test;
 public class FirstTest {
 	@Test
 	public void test() {
-		assertEquals("evaluate", 3 + 3 ,6);
+		assertEquals("evaluate", 3 + 3 ,5);
 	} 
 }
