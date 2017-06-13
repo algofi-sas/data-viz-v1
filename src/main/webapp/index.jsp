@@ -12,6 +12,6 @@
 			value="Submit">
 	</form>
 	<a href="./Login">Bilal</a>
-	<a href="#">Test CI</a>
+	<a href="#">Test CI2</a>
 </body>
 </html>
