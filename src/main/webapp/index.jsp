@@ -12,5 +12,6 @@
 			value="Submit">
 	</form>
 	<a href="./Login">Bilal</a>
+	<a href="./Login">Bilal</a>
 </body>
 </html>
