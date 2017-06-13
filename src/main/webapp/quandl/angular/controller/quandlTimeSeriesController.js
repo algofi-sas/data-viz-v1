@@ -1,7 +1,35 @@
 var quandlTimeSeriesApp = angular.module("quandlTimeSeriesApp", []);
 quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
+	
+	$scope.collapseOptions = ["none", "daily", "weekly", "monthly", "quarterly", "annual"];
 
-	function formatDate(date) {
+	$scope.transformationOptions = ["none", "diff", "rdiff", "rdiff_from", "cumul", "normalize"];
+
+	$scope.orderOptions = ["asc", "desc"];
+	
+	var url = "./dummyRequest";
+	var apiKey = "DKczFdjuL_16KZVxeZKk";
+	$scope.datasetCode = "AAPL";
+	$scope.databaseCode = "WIKI";
+	var responseFormat = "json";
+
+	$scope.succeded = false;
+
+	$scope.loading = false;
+
+	$scope.startDate = new Date();
+	$scope.endDate = new Date();
+	//One year before
+	$scope.startDate.setFullYear( $scope.endDate.getFullYear() - 1 );
+
+	$scope.order = "asc";
+	$scope.collapse = "none";
+	$scope.transformation = "none";
+
+	$scope.limit = 0;
+	$scope.colIndex = -1;
+	
+	$scope.formatDate = function(date) {
 		var monthNames = [
 			"January", "February", "March",
 			"April", "May", "June", "July",
@@ -16,39 +44,15 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 		return day + '-' + (monthIndex+1) + '-' + year;
 	}
 
-	function capitalizeFirstLetter(string) {
+	$scope.capitalizeFirstLetter = function(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
 
-	var url = "./dummyRequest";
-	var apiKey = "DKczFdjuL_16KZVxeZKk";
-	$scope.datasetCode = "AAPL";
-	$scope.databaseCode = "WIKI";
-	var responseFormat = "json";
-
-	$scope.succeded = false;
-
-	$scope.loading = false;
-
-
-	$scope.startDate = new Date();
-	$scope.endDate = new Date();
-	//One year before
-	$scope.startDate.setFullYear( $scope.endDate.getFullYear() - 1 );
-
-	$scope.order = "asc";
-	$scope.collapse = "none";
-	$scope.transformation = "none";
-
-	$scope.limit = 0;
-	$scope.colIndex = -1;
-
-
 	$scope.clear = function(){
 		$scope.succeded = false;
-		var chartContainer = document.getElementById("chartContainer");
-		chartContainer.innerHTML = "";
+		$scope.chartContainer = document.getElementById("chartContainer");
+		$scope.chartContainer.innerHTML = "";
 		if($scope.requestResponse!==undefined){
 			if($scope.requestResponse.data!==undefined){
 				$scope.requestResponse.data.length=0;
@@ -62,8 +66,8 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 		var params = "api_key=" + apiKey 
 		+ "&dataset_code=" + $scope.datasetCode
 		+ "&database_code=" + $scope.databaseCode
-		+ "&start_date=" + formatDate($scope.startDate)
-		+ "&end_date=" + formatDate($scope.endDate) 
+		+ "&start_date=" + $scope.formatDate($scope.startDate)
+		+ "&end_date=" + $scope.formatDate($scope.endDate) 
 		+ "&order=" + $scope.order 
 		+ "&collapse=" + $scope.collapse
 		+ "&transformation=" + $scope.transformation;
@@ -95,27 +99,20 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 				closeValues.push($scope.requestResponse.data[i][4]);
 			}
 
-			drawChart(labels, openValues, highValues, lowValues, closeValues);
+			$scope.drawChart(labels, openValues, highValues, lowValues, closeValues);
 		});
 
 	}
 
-	$scope.collapseOptions = ["none", "daily", "weekly", "monthly", "quarterly", "annual"];
-
-	$scope.transformationOptions = ["none", "diff", "rdiff", "rdiff_from", "cumul", "normalize"];
-
-	$scope.orderOptions = ["asc", "desc"];
-
-	function drawChart(labels, openValues, highValues, lowValues, closeValues){
-
-		var chartContainer = document.getElementById("chartContainer");
+	$scope.drawChart = function (labels, openValues, highValues, lowValues, closeValues){
+		$scope.chartContainer = document.getElementById("chartContainer");
 
 		var ctx = document.createElement("canvas");
 		ctx.width = 500;
 		ctx.height = 250;
 		ctx.id = "myChart";
 
-		chartContainer.appendChild(ctx);
+		$scope.chartContainer.appendChild(ctx);
 
 		var myChart = new Chart(ctx, {
 			type: 'line',
@@ -154,7 +151,7 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 			options: {
 				title:{
 					display:true,
-					text: $scope.datasetCode + ' Stock Price Variation From "' + formatDate($scope.startDate) + '" To "' + formatDate($scope.endDate) + '" - Collapse: ' + capitalizeFirstLetter($scope.collapse)
+					text: $scope.datasetCode + ' Stock Price Variation From "' + $scope.formatDate($scope.startDate) + '" To "' + $scope.formatDate($scope.endDate) + '" - Collapse: ' + $scope.capitalizeFirstLetter($scope.collapse)
 				},
 				scales: {
 					yAxes: [{
@@ -165,7 +162,6 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 				}
 			}
 		});
-
 		myChart.update();
 	}
 });
