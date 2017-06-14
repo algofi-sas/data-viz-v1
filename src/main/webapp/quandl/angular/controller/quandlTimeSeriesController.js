@@ -82,6 +82,10 @@ quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 		$http.get( url + "?" + params )
 		.then(function(response){
 			$scope.requestResponse = response.data.dataset;
+			$scope.stockName = response.data.dataset.name;
+//			document.getElementById('request-description').innerHTML = response.data.dataset.description;
+			$scope.newestAvailableDate = response.data.dataset.newest_available_date;
+			$scope.oldestAvailableDate = response.data.dataset.oldest_available_date;
 			$scope.succeded = true;
 			$scope.loading = false;
 

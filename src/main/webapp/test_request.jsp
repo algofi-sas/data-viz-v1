@@ -114,6 +114,19 @@ select {
 				</form>
 				<hr />
 			</div>
+			<div  ng-show="succeded" class="col-md-12">
+				<h3>{{ stockName }}</h3>
+				<p>
+					<b>Newest Available Date:</b> 
+					{{ newestAvailableDate }}
+				</p>
+				<p>
+					<b>Oldest Available Date:</b> 
+					{{ oldestAvailableDate }}
+				</p>
+				<!-- <p id="request-description"></p> -->
+				<hr />
+			</div>
 			<table ng-show="succeded" id="myTable"
 				class="w3-table-all w3-centered w3-striped w3-hoverable">
 				<thead>
