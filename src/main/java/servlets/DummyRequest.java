@@ -43,10 +43,6 @@ public class DummyRequest extends HttpServlet {
 		
 		String url = "https://www.quandl.com/api/v3/datasets/" + databaseCode + "/" + datasetCode + ".json" ;
 		
-		JSONObject jsonResponse = null;
-		
-		
-		
 		Map<String,String> params = new HashMap<String, String>();
 		params.put("api_key", apiKey);
 		params.put("transformation", transformation);
@@ -66,21 +62,26 @@ public class DummyRequest extends HttpServlet {
 				params.put("column_index", columnIndex);
 			}
 		}
-		
-		
+		System.out.println(url);
+		System.out.println(params);
+		JSONObject jsonResponse = new JSONObject(sendRequest(url, params));;
+		System.out.println(jsonResponse.toString());
+		response.getWriter().append(jsonResponse.toString());
+	}
+	
+	public String sendRequest(String url, Map<String,String> params){
 		HttpRequest httpRequest = new HttpRequest(
 				url,
 				"GET", 
 				params,
 				null);
+		String result = "";
 		try {
-			String result = httpRequest.send();
-			jsonResponse = new JSONObject(result);	
+			result = httpRequest.send();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		response.getWriter().append(jsonResponse.toString());
+		return result;
 	}
 
 }
