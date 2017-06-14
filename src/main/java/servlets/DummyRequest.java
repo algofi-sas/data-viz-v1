@@ -62,10 +62,10 @@ public class DummyRequest extends HttpServlet {
 				params.put("column_index", columnIndex);
 			}
 		}
-		System.out.println(url);
-		System.out.println(params);
+//		System.out.println(url);
+//		System.out.println(params);
 		JSONObject jsonResponse = new JSONObject(sendRequest(url, params));;
-		System.out.println(jsonResponse.toString());
+//		System.out.println(jsonResponse.toString());
 		response.getWriter().append(jsonResponse.toString());
 	}
 	
