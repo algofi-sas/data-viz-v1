@@ -3,15 +3,8 @@
  <title>Home</title>
 </head>
 <body>
-	<h2>Hello World!</h2>
-	<form action="Login" method="POST">
-		Username: <input type="text" name="username" required="required"
-			value="bilalchami" /> <br /> <br /> Password: <input
-			type="password" name="password" required="required"
-			value="bilalchami" /> <br /> <br /> <input type="submit"
-			value="Submit">
-	</form>
-	<a href="./Login">Bilal</a>
-	<a href="#">Test CI</a>
+	<h1>
+		<a href="./test_request.jsp">Quandl API</a>
+	</h1>
 </body>
 </html>
