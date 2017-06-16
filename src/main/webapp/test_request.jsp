@@ -140,7 +140,7 @@ select {
 						<tr ng-repeat="dataElement in requestResponse.data">
 							<td><b>{{ $index+1 }}</b></td>
 							<td ng-repeat="dataCol in dataElement track by $index">{{
-								dataCol }}</td>
+								dataCol | formatData }}</td>
 						</tr>
 						<thead>
 							<tr class="w3-light-grey">

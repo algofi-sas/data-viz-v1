@@ -1,4 +1,23 @@
 var quandlTimeSeriesApp = angular.module("quandlTimeSeriesApp", []);
+
+quandlTimeSeriesApp.filter('formatData', function (numberFilter) {
+	return function(dataElement) {
+		if(isNaN(dataElement)){
+			return dataElement;
+		}else{
+			if(!isDecimal(dataElement)){
+				return numberFilter(dataElement);
+			}else{
+				return numberFilter(dataElement, 3);
+			}
+		}
+	};
+});
+
+function isDecimal(number){
+	return Math.floor(number) !== number;
+}
+
 quandlTimeSeriesApp.controller("quandlCtrl", function($scope, $http){
 	
 	$scope.collapseOptions = ["none", "daily", "weekly", "monthly", "quarterly", "annual"];
