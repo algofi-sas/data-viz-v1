@@ -27,6 +27,7 @@ public class DummyRequest extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json");
 		String apiKey = "DKczFdjuL_16KZVxeZKk";
 		
