@@ -122,7 +122,7 @@ $ git commit -m "Commit Message"
 $ git remote add origin <github-repo-url>
 $ git push origin master
 ```
-To always push to origin master run this command
+To always push to `master` run this command
 ```sh
 $ git push --set-upstream origin master
 ```
