@@ -28,7 +28,7 @@ Continous Integration:
 
 ## How to create a web app and deploy it on Heroku?
 
-###What do you need?
+### What do you need?
 
 Make sure to have installed on your machine:
 
@@ -36,7 +36,7 @@ Make sure to have installed on your machine:
   - Git
   - Heroku CLI
 
-###Create a Maven Web App:
+### Create a Maven Web App:
 
 Run this command to create the app and provide the project-packaging and project-name parameters
 
@@ -63,7 +63,7 @@ $ mvn archetype:generate -DgroupId={project-packaging}
 ```
   The Project Object Model *(POM)* is an XML file that contains information about the project and configuration details used by Maven to build the project. [Learn more about pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
 
-####Add The Webapp Runner Plugin
+#### Add The Webapp Runner Plugin
 Edit the `pom.xml` in a text editor and add the following code in your plugins section.
 
 ```xml
@@ -101,7 +101,7 @@ Edit the `pom.xml` in a text editor and add the following code in your plugins s
 </project>
 ```
 
-###Create the Heroku `Procfile`:
+### Create the Heroku `Procfile`:
 
 The `Procfile` is a simple text file which contains the command that should be called by Heroku to launch your application. Learn more about Heroku Procfile [here](https://devcenter.heroku.com/articles/procfile).
 
@@ -111,7 +111,7 @@ Add this command in the `Procfile` using a text editor:
 web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
 ```
 
-###Make the project folder a Git repository and link it GitHub:
+### Make the project folder a Git repository and link it GitHub:
 
 To link the project to GitHub, we have to [create a new repository](https://help.github.com/articles/creating-a-new-repository/) online, then init the project folder as a Git repo:
 
@@ -127,7 +127,7 @@ To always push to origin master run this command
 $ git push --set-upstream origin master
 ```
 
-###Create Heroku Application
+### Create Heroku Application
 After creating an account on Heroku and installed the Heroku CLI, open the command line in the application directory and run the following Heroku command:
 
 ```sh
@@ -138,7 +138,7 @@ $ heroku create YourAppName
 
 PS: The application name should be unique on Heroku
 
-####Connecting Heroku App to the GitHub repo
+#### Connecting Heroku App to the GitHub repo
 
 If the application was created successfully:
 
