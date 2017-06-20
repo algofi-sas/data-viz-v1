@@ -42,9 +42,9 @@ Run this command to create the app and provide the project-packaging and project
 
 ```sh
 $ mvn archetype:generate -DgroupId={project-packaging}
-						-DartifactId={project-name} 
-						-DarchetypeArtifactId=maven-archetype-webapp 
-						-DinteractiveMode=false
+			-DartifactId={project-name} 
+			-DarchetypeArtifactId=maven-archetype-webapp 
+			-DinteractiveMode=false
 ```
 
  The project structure should look like this. If you don't see the java folder, you can create it manually later.
