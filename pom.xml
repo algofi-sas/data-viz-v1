@@ -25,6 +25,16 @@
 			<artifactId>json</artifactId>
 			<version>20160810</version>
 		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-bundle</artifactId>
+			<version>1.14</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>data-viz-v1</finalName>

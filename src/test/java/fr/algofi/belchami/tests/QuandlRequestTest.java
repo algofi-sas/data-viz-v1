@@ -11,7 +11,7 @@ public class QuandlRequestTest {
 	@Test
 	public void sendRequestTest() {
 		
-		String url = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json";
+//		String url = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json";
 		
 		String startDate = "14-6-2016";
 		String endDate = "14-6-2017";
