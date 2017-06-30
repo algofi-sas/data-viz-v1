@@ -1,7 +1,5 @@
 # DataViz
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
 DataViz is a Java web application that retrieves financial data from financial API sources and displays those data using ChartJs.
 
 ### The technologies used are:
@@ -42,26 +40,26 @@ Run this command to create the app and provide the project-packaging and project
 
 ```sh
 $ mvn archetype:generate -DgroupId={project-packaging}
-			-DartifactId={project-name} 
-			-DarchetypeArtifactId=maven-archetype-webapp 
-			-DinteractiveMode=false
+       -DartifactId={project-name} 
+       -DarchetypeArtifactId=maven-archetype-webapp 
+       -DinteractiveMode=false
 ```
 
  The project structure should look like this. If you don't see the java folder, you can create it manually later.
 
 ```
-.
+.mvn-app
  |-- src
  |   `-- main
- |       `-- java
- |           |-- resources
- |           |-- webapp
- |           |   `-- WEB-INF
- |           |       `-- web.xml
- |           `-- index.jsp
+ |       |-- java
+ |       |-- resources
+ |        `-- webapp
+ |            |-- WEB-INF
+ |            |   `-- web.xml
+ |             `-- index.jsp
   `-- pom.xml
 ```
-  The Project Object Model *(POM)* is an XML file that contains information about the project and configuration details used by Maven to build the project. [Learn more about pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
+  The Project Object Model `pom.xml` is an XML file that contains information about the project and configuration details used by Maven to build the project. [Learn more about pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
 
 #### Add The Webapp Runner Plugin
 Edit the `pom.xml` in a text editor and add the following code in your plugins section.
@@ -101,7 +99,9 @@ Edit the `pom.xml` in a text editor and add the following code in your plugins s
 </project>
 ```
 
-### Create the Heroku `Procfile`:
+PS: You may want to change the JUnit version for future tests. Just modify the version element to `<version>4.12</version>`.
+
+### Create the Heroku Procfile:
 
 The `Procfile` is a simple text file which contains the command that should be called by Heroku to launch your application. Learn more about Heroku Procfile [here](https://devcenter.heroku.com/articles/procfile).
 
@@ -111,9 +111,10 @@ Add this command in the `Procfile` using a text editor:
 web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
 ```
 
-### Make the project folder a Git repository and link it GitHub:
+### Make the project folder a Git repository and link it to GitHub:
 
-To link the project to GitHub, we have to [create a new repository](https://help.github.com/articles/creating-a-new-repository/) online, then init the project folder as a Git repo:
+To link the project to GitHub, we have to [create a new repository](https://help.github.com/articles/creating-a-new-repository/) online, then init the project folder as a Git repo.
+Go ahead and launch a command line in your Maven project directory and run the following commands:
 
 ``` sh
 $ git init
@@ -143,189 +144,167 @@ PS: The application name should be unique on Heroku
 If the application was created successfully:
 
  - Open the Heroku dashboard and select the newly created app
- - In the “Deploy” tab you can connect your application to a GitHub repo by searching for it.
- - Click the button “Enable Automatic Deploys”
+ - In the “Deploy” tab you can connect your application to a GitHub
+   - Select "Connect to GitHub" in the "Deployment method" section
+   - Follow the instructions then search for your repo by its name
+   - When you see the repo, click on the connect button
+ - Click the “Enable Automatic Deploys” button in the "Automatic deploys" section
 
-Finally, you can click on “Deploy Branch” button in the Manual deploy section and you’ll have your application online.
+Finally, you can click on “Deploy Branch” button in the "Manual deploy" section and your application will be published online.
 
+#### Create a deployment Pipeline
 
+A pipeline is a group of Heroku apps that share the same codebase. Each app in a pipeline represents one of the following steps in a [continuous delivery workflow](http://en.wikipedia.org/wiki/Continuous_delivery):
 
-----------
+ - Review
+ - Development
+ - Staging
+ - Production
 
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
+A common Heroku continuous delivery workflow has the following steps:
 
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
+ 1. A developer creates a pull request to make a change to the codebase.
+ 2. Heroku automatically creates a review app for the pull request, allowing developers to test the change.
+ 3. When the change is ready, it’s merged into the codebase’s master branch.
+ 4. The master branch is automatically deployed to staging for further testing.
+ 5. When it’s ready, the staging app is promoted to production, where the change is available to end users of the app.
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+Learn More about Heroku Pipeline [here](https://devcenter.heroku.com/articles/pipelines).
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+Here you can find a simple and quick video that explains how to create a Heroku pipeline and add the continuous delivery approach to your project.
 
-### Tech
+[Continuous Delivery with Heroku and GitHub](https://youtu.be/_tiecDrW6yY?t=179)
 
-Dillinger uses a number of open source projects to work properly:
+### Add Continuous Integration to your app
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
+> *Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.* [\[source\]](https://www.thoughtworks.com/continuous-integration)
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
+In this example, we will be using [Codeship.com](https://codeship.com/) as a Continuous Integration service in the cloud.
 
-### Installation
+The main profit to gain when adding a CI service is that the Unit-Tests will be automatically executed on each push, so if the test fails, the person responsible will be notified and the commited code will not be published online.
 
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
+#### Add your project to Codeship
 
-Install the dependencies and devDependencies and start the server.
+After creating an account on Codeship:
 
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
+ - Create a new Project in the projects section
+ - Connect it to the GitHub repo
+ - Select Codeship Basic
+ - Select Java from the "Select your technology to prepopulate basic commands" dropdown list
+ - In the "Configure Test Pipelines" section, un-comment the `mvn test` command and remove the others
+ - Now you can "Save and go to dashboard"
+
+#### Configure Codeship project with Heroku App
+
+##### **Heroku:**
+
+ - Go to Heroku pipeline dashboard
+ - For the staging app, click the top right button to see more options
+ - Select the "Configure automatic deployment..." option
+ - Check that "Wait for CI to pass before deploy" checkbox is selected
+
+##### **Codeship:**
+
+Follow the steps in [this link](https://documentation.codeship.com/basic/continuous-deployment/deployment-to-heroku/) to configure Codeship with your heroku app.
+
+#### Testing Codeship CI
+
+Make sure you have the up to date version of your app from GitHub. Run the following command:
+
+``` sh
+$ git pull origin master
 ```
 
-For production environments...
+To test if Codeship is working properly, make sure you have changed the JUnit version in the `pom.xml` file.
 
-```sh
-$ npm install --production
-$ npm run predeploy
-$ NODE_ENV=production node app
+Now go ahead and create new Java Class in the following directory:
+
+`YourProject > src > test > java > [application-packages]`
+
+Here is a JUnit Java Class Test:
+
+``` java
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class MyTest {
+
+  // This Test will Pass
+  @Test
+  public void myFirstTest() {
+    assertEquals("evaluate", 3 + 3 , 6);
+  }
+  
+}
+
 ```
 
-### Plugins
+To trigger Codeship, add the new file to git and commit/push it to upstream
 
-Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
+``` sh
+$ git add .
+$ git commit -m "Added a Test Class"
+$ git push origin master
+```
+A new "Build" will be created in the Codeship dashboard.
+The test will pass and a new version of the application will be deployed on Heroku.
 
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md] [PlDb] |
-| Github | [plugins/github/README.md] [PlGh] |
-| Google Drive | [plugins/googledrive/README.md] [PlGd] |
-| OneDrive | [plugins/onedrive/README.md] [PlOd] |
-| Medium | [plugins/medium/README.md] [PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md] [PlGa] |
+Now try Failing the test as follow: 
 
+``` java
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
-### Development
+public class MyTest {
 
-Want to contribute? Great!
+  // This Test will Pass
+  @Test
+  public void myFirstTest() {
+    assertEquals("evaluate 3 + 3", 3 + 3 , 6);
+  }
 
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
+  // This Test will Fail
+  @Test
+  public void mySecondTest() {
+    assertEquals("evaluate 3 + 2", 3 + 2 , 6);
+  }
 
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
+}
 ```
 
-Second Tab:
-```sh
-$ gulp watch
+And change the `index.jsp` file to see if the updates will be deployed online or not.
+
+`YourProject > src > main > webapp > index.jsp`
+
+``` html
+<html>
+  <body>
+    <h2>Hello John</h2>
+  </body>
+</html>
 ```
 
-(optional) Third:
-```sh
-$ karma test
-```
-#### Building for source
-For production release:
-```sh
-$ gulp build --prod
-```
-Generating pre-built zip archives for distribution:
-```sh
-$ gulp build dist --prod
-```
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
+Re-run the git commands:
 
-By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
-
-```sh
-cd dillinger
-docker build -t joemccann/dillinger:${package.json.version}
-```
-This will create the dillinger image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of Dillinger.
-
-Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:${package.json.version}
+``` sh
+$ git add .
+$ git commit -m "Failing the test on purpose"
+$ git push origin master
 ```
 
-Verify the deployment by navigating to your server address in your preferred browser.
+You'll see that the build in Codeship will not succeed, and the home page of your application will still have the "Hello World" title instead of "Hello John", which means that Heroku didn't deploy the new version because it contains failing tests. And if you check your email inbox, you have probably recieved an alert email from Codeship telling you that the build failed.
 
-```sh
-127.0.0.1:8000
-```
+Now you can re-modify the java class to make it pass the tests so you can see the modifications you've made to the `index.jsp` file.
 
-#### Kubernetes + Google Cloud
-
-See [KUBERNETES.md](https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md)
-
-
-### Todos
-
- - Write MOAR Tests
- - Add Night Mode
-
-License
-----
-
-MIT
-
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-
-
+[//]: # (Links)
 
    [AngularJS]: <http://angularjs.org>
-   [Jasmine]: <https://jasmine.github.io/>
-   [Chart.js]: <http://www.chartjs.org//>
-   [Karma 1.0]: <https://karma-runner.github.io/1.0/index.html/>
-   [Heroku]: <https://www.heroku.com/>
-   [Codeship]: <https://codeship.com/>
-   [Maven]: <https://maven.apache.org/>
-   [JavaScript]: <https://developer.mozilla.org/fr/docs/Web/JavaScript/>
+   [Jasmine]: <https://jasmine.github.io>
+   [Chart.js]: <http://www.chartjs.org>
+   [Karma 1.0]: <https://karma-runner.github.io/1.0/index.html>
+   [Heroku]: <https://www.heroku.com>
+   [Codeship]: <https://codeship.com>
+   [Maven]: <https://maven.apache.org>
+   [JavaScript]: <https://developer.mozilla.org/fr/docs/Web/JavaScript>
    [Java 8]: <https://www.java.com/fr/download/faq/java8.xml>
-   [JUnit 4]: <http://junit.org/junit4/>
-   
-
-   [Gulp]: <http://gulpjs.com]
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+   [JUnit 4]: <http://junit.org/junit4>
