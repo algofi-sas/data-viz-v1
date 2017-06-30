@@ -6,3 +6,6 @@
 /src/main/webapp/karma.conf.js
 /src/main/webapp/package.json
 /src/main/webapp/start-karma.bat
+/.settings
+.classpath
+.project
