@@ -75,4 +75,31 @@ public class QuandlServices {
 		return result;
 	}
 	
+	@GET
+	@Path("/bitcoinBaseEUR")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response bitcoinBaseEURRESTService(	@QueryParam("dataset_code") String databaseCode,
+												@QueryParam("database_code") String datasetCode,
+												@QueryParam("start_date") String startDate,
+												@QueryParam("end_date") String endDate,
+												@QueryParam("order") String order,
+												@QueryParam("collapse") String collapse,
+												@QueryParam("transformation") String transformation) {
+		
+		String apiKey = "DKczFdjuL_16KZVxeZKk";
+		
+		String url = "https://www.quandl.com/api/v3/datasets/" + datasetCode + "/" + databaseCode + ".json" ;
+		Map<String,String> params = new HashMap<String, String>();
+		params.put("api_key", apiKey);
+		params.put("transformation", transformation);
+		params.put("collapse", collapse);
+		params.put("order", order);
+		params.put("end_date", endDate);
+		params.put("start_date", startDate);
+		
+		JSONObject jsonResponse = new JSONObject(sendRequest(url, params));
+		
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").type(MediaType.APPLICATION_JSON).entity(jsonResponse.toString()).build();
+	}
+	
 }
